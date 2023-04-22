@@ -1,0 +1,10 @@
+﻿  main.cpp
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall cv::Mat::Mat(void)" (??0Mat@cv@@QAE@XZ) в функции "public: __thiscall cv::MatExpr::operator class cv::Mat(void)const " (??BMatExpr@cv@@QBE?AVMat@1@XZ).
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) в функции "public: __thiscall cv::MatExpr::~MatExpr(void)" (??1MatExpr@cv@@QAE@XZ).
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: static class cv::MatExpr __cdecl cv::Mat::zeros(int,int,int)" (?zeros@Mat@cv@@SA?AVMatExpr@2@HHH@Z) в функции _main.
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall cv::Mat::Mat(class cv::Mat &&)" (??0Mat@cv@@QAE@$$QAV01@@Z) в функции "public: __thiscall cv::MatExpr::operator class cv::Mat(void)const " (??BMatExpr@cv@@QBE?AVMat@1@XZ).
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "int __cdecl cv::waitKey(int)" (?waitKey@cv@@YAHH@Z) в функции _main.
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "void __cdecl cv::imshow(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class cv::debug_build_guard::_InputArray const &)" (?imshow@cv@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV_InputArray@debug_build_guard@1@@Z) в функции _main.
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "void __cdecl cv::circle(class cv::debug_build_guard::_InputOutputArray const &,class cv::Point_<int>,int,class cv::Scalar_<double> const &,int,int,int)" (?circle@cv@@YAXABV_InputOutputArray@debug_build_guard@1@V?$Point_@H@1@HABV?$Scalar_@N@1@HHH@Z) в функции _main.
+C:\Program Files\opencv\build\x64\vc15\lib\opencv_world453d.lib : warning LNK4272: тип компьютера библиотеки "x64" конфликтует с типом целевого компьютера "x86"
+D:\Dev\C++\OpenCV\OpenCV\Debug\OpenCV.exe : fatal error LNK1120: неразрешенных внешних элементов: 7

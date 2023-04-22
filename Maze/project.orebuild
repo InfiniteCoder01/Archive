@@ -1,0 +1,3 @@
+library "Mova";
+output "Maze.exe";
+flags "-O3 -lgdi32 -lopengl32 -D WIN32_LEAN_AND_MEAN";

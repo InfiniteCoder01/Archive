@@ -1,0 +1,29 @@
+platform "Windows" {
+    command: "@g++ $files -o $out -I*$include";
+    submoduleCommand: "*g++ -c $files -o $out -I*$include";
+}
+
+module "Mova" {
+    includePath: "D:/Dev/C++/LIB/Mova/src";
+    files: "$includePath/**.cpp";
+    files: "$includePath/**.hpp";
+    files: "$includePath/**.h";
+    include: "$includePath";
+    include: "D:/Dev/C++/LIB/imgui";
+}
+
+module "ImGUI" {
+    includePath: "D:/Dev/C++/LIB/imgui";
+    include: "$includePath";
+    files: "$includePath/*.cpp";
+    files: "$includePath/backends/imgui_impl_opengl3.cpp";
+}
+
+module "Main" {
+    files: "src/**";
+    output: "Animator.exe";
+    flags: "-O3 -lgdi32 -lopengl32 -D WIN32_LEAN_AND_MEAN";
+
+    submodule: "Mova";
+    submodule: "ImGUI";
+}
