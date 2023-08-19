@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    
+    <folder name="Editors">
+        <folder name="text">
+            <folder name="x-jplugin">
+
+                <attr name="displayName" bundlevalue="net.infinitecoder.jplugin.Bundle#Editors/text/x-jplugin"/>
+
+                <folder name="FontsColors">
+                    <folder name="NetBeans">
+                        <folder name="Defaults">
+                            <file name="FontAndColors.xml">
+                                <attr name="displayName" bundlevalue="net.infinitecoder.jplugin.Bundle#Editors/text/x-jplugin/FontsColors/NetBeans/Defaults/FontAndColors.xml"/>
+                            </file>
+                        </folder>
+                    </folder>
+                </folder>
+                
+                <folder name="CodeTemplates">
+                    <folder name="Defaults">
+                        <file name="code-templates.xml" url="code-templates.xml"/>
+                    </folder>
+                </folder>
+                
+                <file name="net-infinitecoder-jplugin-netbeans-parser-JPluginParserFactory.instance"/>
+                <file name="net-infinitecoder-jplugin-netbeans-parser-errorhighlighting-JPluginSyntaxErrorHighlightingTaskFactory.instance"/>
+            </folder>
+        </folder>
+    </folder>
+    
+    <folder name="OptionsDialog">
+        <folder name="PreviewExamples">
+            <folder name="text">
+                <file name="x-jplugin" url="JPluginTemplate.cjp"/>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>

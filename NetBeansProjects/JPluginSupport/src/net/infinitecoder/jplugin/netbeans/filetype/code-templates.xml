@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE codetemplates PUBLIC "-//NetBeans//DTD Editor Code Templates settings 1.0//EN" "http://www.netbeans.org/dtds/EditorCodeTemplates-1_0.dtd">
+<codetemplates>
+    <codetemplate contexts="jplugin-code" abbreviation="switch">
+        <code><![CDATA[switch (${name}) {
+  case ${e1}: ${cursor}
+            break;
+}]]></code>
+        <description>switch</description>
+    </codetemplate>
+    <codetemplate contexts="jplugin-code" abbreviation="for">
+        <code><![CDATA[for (${a} = ${0}; ${a} < ${10}; ${a}++) {
+  ${cursor}
+}]]></code>
+        <description>for loop</description>
+    </codetemplate>
+    <codetemplate contexts="jplugin-code" abbreviation="sout">
+        <code><![CDATA[println(${a});]]></code>
+        <description>println</description>
+    </codetemplate>
+    <codetemplate contexts="jplugin-code" abbreviation="class">
+        <code><![CDATA[class ${name} {
+    ${cursor}
+};]]></code>
+        <description>class</description>
+    </codetemplate>
+</codetemplates>
