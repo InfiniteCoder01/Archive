@@ -1,0 +1,15 @@
+#include "pe3264.cjp"
+
+bool Is2power(int x) { return (!(x & (x - 1))); }
+long ALIGN_DOWN(long x, long align) { return (x & ~(align - 1)); }
+long ALIGN_UP(long x, long align) { return ((x & (align - 1)) ? ALIGN_DOWN(x, align) + align : x); }
+
+
+void analyze() {
+	readBin("test.exe");
+	File pefile = new File();
+	long filesize = sizeof(pefile.bytes);
+	pe32 executable(pefile);
+}
+
+analyze();

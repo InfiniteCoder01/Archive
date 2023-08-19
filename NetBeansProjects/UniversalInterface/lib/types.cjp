@@ -1,0 +1,39 @@
+long unsigned(int n) {
+	return n < 0 ? n * -1 : n;
+}
+
+int unsigned(short n) {
+	return n < 0 ? n * -1 : n;
+}
+
+short unsigned(char n) {
+	return n < 0 ? n * -1 : n;
+}
+
+long reverseBytes(long n) {
+	char bytes[8];
+	bytes[0] = n;
+	bytes[1] = n >> 8;
+	bytes[2] = n >> 16;
+	bytes[3] = n >> 24;
+	bytes[4] = n >> 32;
+	bytes[5] = n >> 40;
+	bytes[6] = n >> 48;
+	bytes[7] = n >> 56;
+	return bytes[7] + (bytes[6] >> 8) + (bytes[5] >> 16) + (bytes[4] >> 24) + (bytes[3] >> 32) + (bytes[2] >> 40) + (bytes[1] >> 48) + (bytes[0] >> 56);
+}
+
+int reverseBytes(int n) {
+	char bytes[4];
+	bytes[0] = n;
+	bytes[1] = n >> 8;
+	bytes[2] = n >> 16;
+	bytes[3] = n >> 24;
+	return bytes[3] + (bytes[2] >> 8) + (bytes[1] >> 16) + (bytes[0] >> 24);
+}
+short reverseBytes(short n) {
+	char bytes[2];
+	bytes[0] = n;
+	bytes[1] = n >> 8;
+	return bytes[1] + (bytes[0] >> 8);
+}

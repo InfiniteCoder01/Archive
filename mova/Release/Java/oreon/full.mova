@@ -1,0 +1,55 @@
+byte a = 2;
+byte b = 2;
+byte c = a + b;
+print(c);
+print(99);
+print(2 - 2);
+print(99);
+print(2 * 2);
+print(99);
+print(2 / 2);
+print(99);
+print(2 % 2);
+print(99);
+a = 10;
+while(a){
+	print(a);
+	a = a - 1;
+	print(99);
+}
+do{
+	print(1);
+}while(0);
+if(0){
+	print(0);
+}else{
+	print(1);
+}
+a = 0;
+byte i = 10;
+while(i){
+	a = !a;
+	print(a);
+	i = i - 1;
+}
+a = 0;
+a = ~a;
+print(a);
+if(2 == 2){
+	print(1);
+}
+if(2 > 1){
+	print(0);
+}
+if(2 < 4){
+	print(1);
+}
+if(2 >= 1){
+	print(0);
+}
+if(2 <= 2){
+	print(1);
+}
+if(0 || 1){
+	print(0);
+}

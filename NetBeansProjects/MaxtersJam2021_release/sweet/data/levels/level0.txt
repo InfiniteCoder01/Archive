@@ -1,0 +1,24 @@
+50 30
+//width height
+5 39 14
+1 2 15
+3 20 15
+1 38 15
+2 39 15
+3 40 15
+//block [blockType(texNum in atlas) x y]
+//or rect [block startx starty endx endy]
+rect 2 3 15 19 15
+rect 6 21 15 37 15
+//or spawn entity [type(texNum in atlas from 0) x y]
+entity 0 15 14
+entity 0 17 14
+entity 0 18 14
+entity 0 19 14
+entity 0 20 14
+entity 0 14 14
+entity 0 13 14
+entity 0 12 14
+entity 0 11 14
+entity 0 10 14
+entity 1 9 14

@@ -1,0 +1,2 @@
+plugins/built-in/default/config.conf
+plugins/built-in/test/config.conf

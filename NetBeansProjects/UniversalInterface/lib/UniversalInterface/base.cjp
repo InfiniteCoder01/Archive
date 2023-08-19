@@ -1,0 +1,19 @@
+String __filename = "config.conf";
+
+class File {
+	char bytes = readBinFile(__filename);
+	int seeked = 0;
+	
+	void seekg(long size) {
+		size = size - seeked;
+		for(long i = 0; i < sizeof(bytes) - size - 1; i++) {
+			bytes[i] = bytes[i + size];
+		}
+		seeked += size;
+	}
+	
+};
+
+void readBin(String filename) {
+	__filename = filename;
+}

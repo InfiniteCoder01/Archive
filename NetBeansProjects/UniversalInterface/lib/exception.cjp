@@ -1,0 +1,25 @@
+class Exception {
+	String message = "";
+	
+	public Exception() {
+		
+	}
+	
+	public Exception(String msg) {
+		message = msg;
+	}
+	
+	String operator+(String other) {
+		return message + other;
+	}
+};
+
+class RuntimeException extends Exception {
+	public RuntimeException() {
+		Exception();
+	}
+	
+	public RuntimeException(String msg) {
+		Exception(msg);
+	}
+};

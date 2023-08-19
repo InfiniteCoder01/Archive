@@ -1,0 +1,106 @@
+#include "structures/windows.cjp"
+
+bool Is2power(int x) { return (!(x & (x - 1))); }
+long ALIGN_DOWN(long x, long align) { return (x & ~(align - 1)); }
+long ALIGN_UP(long x, long align) { return ((x & (align - 1)) ? ALIGN_DOWN(x, align) + align : x); }
+short wchar(char l, char h) { return ((l << 8) + h); }
+
+class PortableExecutable {
+	File pefile = new File();
+	long filesize = sizeof(pefile.bytes);
+	IMAGE_DOS_HEADER dos_header;
+	IMAGE_NT_HEADERS32 nt_headers;
+	
+	void testDosHeader() {
+		dos_header = pefile;
+		
+		if(dos_header.e_magic != wchar('M', 'Z')) {
+			throw new RuntimeException("IMAGE_DOS_HEADER signature is incorrect");
+		}
+		
+		if((dos_header.e_lfanew % sizeof(DWORD)) != 0) {
+			throw new RuntimeException("PE header is not DWORD-aligned");
+		}
+	}
+	
+	void testNTHeader() {
+		pefile.seekg(unsigned(reverseBytes(dos_header.e_lfanew)));
+		nt_headers = pefile;
+		WORD signature = nt_headers.Signature >> 16;
+		if(signature != wchar('P', 'E')) {//wchar('P', 'E')
+			throw new RuntimeException("Incorrect PE signature");
+		}
+		
+		if(nt_headers.OptionalHeader.Magic != 0xB01) {//TODO: PE64
+			throw new RuntimeException("This PE is not PE32");
+		}
+	}
+	
+	void analyzeSection() {
+		IMAGE_SECTION_HEADER header = pefile;
+		pefile.seekg((long)(pefile.seeked + sizeof(header)));
+
+		if(!header.SizeOfRawData && !header.VirtualSize) {
+			throw new RuntimeException("Virtual and Physical sizes of section can't be 0 at the same time");
+		}
+		
+		if(header.SizeOfRawData != 0) {
+			if(ALIGN_DOWN(header.PointerToRawData >> 8, nt_headers.OptionalHeader.FileAlignment >> 8) + (header.SizeOfRawData >> 8) > filesize) {
+				throw new RuntimeException("Incorrect section address or size");
+			}
+			DWORD virtual_size_aligned;
+			if(header.VirtualSize == 0) {
+				virtual_size_aligned = ALIGN_UP(header.SizeOfRawData >> 8, nt_headers.OptionalHeader.SectionAlignment >> 8);
+			} else {
+				virtual_size_aligned = ALIGN_UP(header.VirtualSize >> 24, nt_headers.OptionalHeader.SectionAlignment >> 8);
+			}
+			if((header.VirtualAddress >> 8) + virtual_size_aligned > ALIGN_UP(nt_headers.OptionalHeader.SizeOfImage >> 8, nt_headers.OptionalHeader.SectionAlignment >> 8)) {
+				throw new RuntimeException("Incorrect section address or size");
+			}
+		}
+
+		String name = "";
+		name += header.Name[0];
+		name += header.Name[1];
+		name += header.Name[2];
+		name += header.Name[3];
+		name += header.Name[4];
+		name += header.Name[5];
+		name += header.Name[6];
+		name += header.Name[7];
+		println("Section:         " + name + "\n=======================");
+		println("Virtual size:    " + (String)header.VirtualSize);
+		println("Raw size:        " + (String)header.SizeOfRawData);
+		println("Virtual address: " + (String)header.VirtualAddress);
+		println("Raw address:     " + (String)header.PointerToRawData);
+
+		println(header.Characteristics << 1);
+
+		print("Characteristics: ");
+		if((header.Characteristics << 1) & IMAGE_SCN_MEM_READ)
+			print("R ");
+		if((header.Characteristics << 1) & IMAGE_SCN_MEM_WRITE)
+			print("W ");
+		if((header.Characteristics << 1) & IMAGE_SCN_MEM_EXECUTE)
+			print("X ");
+		if((header.Characteristics << 1) & IMAGE_SCN_MEM_DISCARDABLE)
+			print("discardable ");
+		if((header.Characteristics << 1) & IMAGE_SCN_MEM_SHARED)
+			print("shared");
+
+		println("\n");
+	}
+	
+	void read() {
+		testDosHeader();
+		testNTHeader();
+		//first sect adress--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		DWORD first_section = unsigned(reverseBytes(dos_header.e_lfanew)) + ((nt_headers.FileHeader.SizeOfOptionalHeader & 0xFFFF) >> 8) + sizeof(IMAGE_FILE_HEADER) + sizeof(DWORD) /* Signature */;
+		pefile.seekg((long)first_section);
+		
+		int sectionCount = nt_headers.FileHeader.NumberOfSections >> 8;
+		for(int i = 0; i < sectionCount; i++) {
+			analyzeSection();
+		}
+	}
+};

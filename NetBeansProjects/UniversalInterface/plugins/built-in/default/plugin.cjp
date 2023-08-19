@@ -1,0 +1,12 @@
+#include <types.cjp>
+#include <exception.cjp>
+#include <UniversalInterface/base.cjp>
+#include "structures/pe.cjp"
+
+void analyze() {
+	readBin("test.exe");
+	PortableExecutable pe = new PortableExecutable();
+	pe.read();
+}
+
+analyze();

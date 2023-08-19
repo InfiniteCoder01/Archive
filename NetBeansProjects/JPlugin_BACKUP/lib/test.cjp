@@ -1,0 +1,5 @@
+int sum() {
+	println("Call");
+	return 0;
+}
+println(sum());
